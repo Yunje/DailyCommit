@@ -38,5 +38,8 @@
     <ClInclude Include="SIMD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Interpolation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

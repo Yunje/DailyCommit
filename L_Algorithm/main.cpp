@@ -4,6 +4,7 @@
 #include "lap_define.h"
 #include "SIMD.h"
 #include <ctime>
+#include "Interpolation.h"
 
 #define ARR_SIZE 3000000
 
@@ -15,7 +16,9 @@ float pResult[ARR_SIZE];
 
 int main()
 {
-	int nSize = (int)ARR_SIZE;
+	InterpPrac();
+
+	/*int nSize = (int)ARR_SIZE;
 	for (int i = 0; i < ARR_SIZE; i++){
 		arr1[i] = 1.f;
 		arr2[i] = 2.f;
@@ -45,7 +48,7 @@ int main()
 	for (int i = 0; i < 100; i++){
 		std::cout << pResult[i] << " ";
 	}
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 	//bool bRet = true;
 	//string str;
 	//// step1: abs(target - LPC simulation)

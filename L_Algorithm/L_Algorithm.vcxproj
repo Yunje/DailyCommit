@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_types.h" />
+    <ClInclude Include="Interpolation.h" />
     <ClInclude Include="lap_define.h" />
     <ClInclude Include="lap_m2m.h" />
     <ClInclude Include="lap_v2m.h" />
