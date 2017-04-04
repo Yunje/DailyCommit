@@ -45,6 +45,7 @@
 //	
 //
 //}
+//
 
 template <typename T>
 void BilinearInterpolation(const Img<T>& in, Img<T>* out)
