@@ -136,6 +136,7 @@ T& Img<T>::in(int _i, int _j)
 template <typename T>
 T Img<T>::out(int _i, int _j) const
 {
+	if (h <= _i || _i < 0 || w <= _j || _i < 0) return static_cast<T>(0);
 	return im_[_i*w + _j];
 }
 
@@ -247,7 +248,8 @@ void Img<T>::ConvertTypeFrom(const Img<double>& _in)
 template <typename T>
 void Img<T>::LoadImage(const std::string& filepath)
 {
-	Mat img = imread(filepath);
+	Mat img = imread(filepath, 0);
+ 	//std::cout << img.type() << CV_8UC3 << std::endl;
 	//imwrite("C:\\Users\\yunje\\Documents\\GitHub\\L_Algorithm\\L_Algorithm\\butterfly.bilinear.bmp",img);
 	CopyFromMat(img);
 }
