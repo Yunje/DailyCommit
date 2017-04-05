@@ -5,6 +5,7 @@
 #include "SIMD.h"
 #include <ctime>
 #include "Interpolation.h"
+#include "segmentation.h"
 
 #define ARR_SIZE 3000000
 
@@ -16,7 +17,26 @@ float pResult[ARR_SIZE];
 
 int main()
 {
-	InterpPrac();
+	//InterpPrac();
+	int arr2d[4*4] = {
+		1,0,1,1,
+		0,1,0,1,
+		1,0,1,1,
+		0,1,0,1
+	};
+	int out[4*4];
+	FloodFill ff;
+	ff.Init(arr2d, 4, 4);
+	ff.Run();
+	ff.Get(out);
+
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < 4; j++){
+			std::cout << out[i * 4 + j] << " ";
+		}
+		std::cout << std::endl;
+	}
+
 
 	/*int nSize = (int)ARR_SIZE;
 	for (int i = 0; i < ARR_SIZE; i++){
