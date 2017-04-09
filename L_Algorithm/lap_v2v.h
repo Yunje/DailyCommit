@@ -18,6 +18,14 @@ void Axpy(const Vect<T>& a, const Vect<T>& x, Vect<T>* y);
 template <typename T>
 double Norm(const Vect<T>& in, NormType type = L2);
 
-
+template <typename T>
+void VVMult(const double* in1, const double* in2, double* out, int size)
+{
+	double sum = 0.0;
+	for (int i = 0; i < size; i++){
+		sum += in1[i] * in2[i];
+	}
+	(*out) = sum;
+}
 
 #endif

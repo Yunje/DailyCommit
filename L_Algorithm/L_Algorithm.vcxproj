@@ -163,6 +163,10 @@
     <ClInclude Include="lap_m2m.h" />
     <ClInclude Include="lap_v2m.h" />
     <ClInclude Include="lap_v2v.h" />
+<<<<<<< HEAD
+=======
+    <ClInclude Include="mem_control.h" />
+>>>>>>> Test
     <ClInclude Include="segmentation.h" />
     <ClInclude Include="SIMD.h" />
   </ItemGroup>
