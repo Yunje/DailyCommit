@@ -44,11 +44,8 @@
     <ClInclude Include="segmentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="mem_control.h">
       <Filter>Header Files</Filter>
     </ClInclude>
->>>>>>> Test
   </ItemGroup>
 </Project>
