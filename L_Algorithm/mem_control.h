@@ -2,9 +2,9 @@
 #define _MEM_CONTROL_H_
 
 template<typename T>
-void MemAlloc(T* ptr, int sz1)
+void MemAlloc(T** ptr, int sz1)
 {
-	ptr = new T[sz1];
+	(*ptr) = new T[sz1];
 }
 
 template<typename T>
@@ -22,11 +22,11 @@ void MemFree(T* ptr)
 }
 
 template<typename T>
-void MemAlloc(T** ptr, int sz1, int sz2)
+void MemAlloc(T*** ptr, int sz1, int sz2)
 {
-	ptr = new T*[sz1];
+	(*ptr) = new T*[sz1];
 	for (int i = 0; i < sz1; i++){
-		ptr[i] = new T[sz2];
+		(*ptr)[i] = new T[sz2];
 	}
 }
 
@@ -50,19 +50,19 @@ void MemFree(T** ptr, int sz1)
 }
 
 template<typename T>
-void MemAlloc(T*** ptr, int sz1, int sz2, int sz3)
+void MemAlloc(T**** ptr, int sz1, int sz2, int sz3)
 {
-	ptr = new T**[sz1];
+	(*ptr) = new T**[sz1];
 	for (int i = 0; i < sz1; i++){
-		ptr[i] = new T*[sz2];
+		(*ptr)[i] = new T*[sz2];
 		for (int j = 0; j < sz2; j++){
-			ptr[i][j] = new T[sz3];
+			(*ptr)[i][j] = new T[sz3];
 		}
 	}
 }
 
 template<typename T>
-void MemAlloc(T*** ptr, int sz1, int sz2, int sz3)
+void MemZero(T*** ptr, int sz1, int sz2, int sz3)
 {
 	for (int i = 0; i < sz1; i++){
 		for (int j = 0; j < sz2; j++){

@@ -20,11 +20,11 @@ void BicubicInterpolation(const Img<T>& in, Img<T>* out)
 	fx.Zeros(in.h, in.w);
 	fy.Zeros(in.h, in.w);
 	fxy.Zeros(in.h, in.w);
-	in.CopyTo(f);
+	in.CopyTo(&f);
 	for (int i = 1; i < in.h - 1; i++){
 		for (int j = 1; j < in.w - 1; j++){
 			fx.in(i, j) = (f.out(i, j + 1) - f.out(i, j - 1)) / 2.0;
-			fy.in(i, j) = (f.out(i + 1, j) - f.out(i - 1, j) / 2.0;
+			fy.in(i, j) = (f.out(i + 1, j) - f.out(i - 1, j)) / 2.0;
 			fxy.in(i, j) = (f.out(i + 1, j + 1) - f.out(i + 1, j - 1) 
 				- f.out(i - 1, j + 1) + f.out(i - 1, j - 1)) / 4.0;
 		}
@@ -51,8 +51,8 @@ void BicubicInterpolation(const Img<T>& in, Img<T>* out)
 	};
 
 	double **img = nullptr, **coefs = nullptr;
-	MemAlloc<double>(img, in.h*in.w, 16);
-	MemAlloc<double>(coefs, in.h*in.w, 16);
+	MemAlloc<double>(&img, in.h*in.w, 16);
+	MemAlloc<double>(&coefs, in.h*in.w, 16);
 	MemZero<double>(img, in.h*in.w, 16);
 	MemZero<double>(coefs, in.h*in.w, 16);
 	for (int i = 1; i < in.h - 1; i++){
@@ -79,16 +79,30 @@ void BicubicInterpolation(const Img<T>& in, Img<T>* out)
 	}
 
 	// fill out image
-
+	double xy[16] = { 0, };
 	for (int i = 0; i < out->h; i++){
 		for (int j = 0; j < out->w; j++){
 			double posx = j * ratiox;
 			double posy = i * ratioy;
-			int dx = (int)posx - posx;
-			int dy = (int)posy - posy;
+			int nposx = (int)posx;
+			int nposy = (int)posy;
+			int dx = posx - nposx;
+			int dy = posy - nposy;
 			double outval = 0.0;
+			
 			//TODO:
-			VVMult<double>(???, coefs, &outval, 16);
+			xy[0] = 1;
+			xy[1] = dy;
+			xy[2] = dy * dy;
+			xy[3] = dy * dy * dy;
+			for (int i = 1; i < 4; i++){
+				xy[4 * i + 0] = dx * xy[4 * (i - 1) + 0];
+				xy[4 * i + 1] = dx * xy[4 * (i - 1) + 1];
+				xy[4 * i + 2] = dx * xy[4 * (i - 1) + 2];
+				xy[4 * i + 3] = dx * xy[4 * (i - 1) + 3];
+			}
+
+			VVMult<double>(xy, coefs[nposy * in.w + nposx], &outval, 16);
 			out->in(i, j) = outval;
 
 		}

@@ -28,7 +28,7 @@ public:
 	void ConvertTypeFrom(const Img<double>& _in);
 	T& in(int i, int j);
 	T out(int i, int j) const;
-	void CopyTo(Img<T>* _out);
+	void CopyTo(Img<T>* _out) const;
 	void Print();
 	void LoadImage(const std::string& filepath);
 	void SaveImage(const std::string& filepath, img_type type);
@@ -141,7 +141,7 @@ T Img<T>::out(int _i, int _j) const
 }
 
 template <typename T>
-void Img<T>::CopyTo(Img<T>* _out)
+void Img<T>::CopyTo(Img<T>* _out) const
 {
 	if (_out == nullptr){
 		_out->Zeros(w, h);
