@@ -7,6 +7,9 @@ typedef enum _img_type{
 	UNSIGNED_CHAR = 1, UNSIGNED_SHORT, INT, FLOAT, DOUBLE
 } img_type;
 
+typedef void (*MVMult1D_REF)(const float* mat, const float* vec, float* vec_out, int h, int w);
+typedef void (*VVMult_REF)(const float* in1, const float* in2, float* out, int size);
+
 template <typename T>
 class Img{
 private:
@@ -26,8 +29,8 @@ public:
 	void ConvertTypeFrom(const Img<int>& _in);
 	void ConvertTypeFrom(const Img<float>& _in);
 	void ConvertTypeFrom(const Img<double>& _in);
-	T& in(int i, int j);
-	T out(int i, int j) const;
+	T& set(int i, int j);
+	T get(int i, int j) const;
 	void CopyTo(Img<T>* _out) const;
 	void Print();
 	void LoadImage(const std::string& filepath);
@@ -128,13 +131,13 @@ void Img<T>::CopyToMat(Mat* _out, img_type type)
 }
 
 template <typename T>
-T& Img<T>::in(int _i, int _j)
+T& Img<T>::set(int _i, int _j)
 {
 	return im_[_i*w + _j];
 }
 
 template <typename T>
-T Img<T>::out(int _i, int _j) const
+T Img<T>::get(int _i, int _j) const
 {
 	if (h <= _i || _i < 0 || w <= _j || _i < 0) return static_cast<T>(0);
 	return im_[_i*w + _j];
@@ -148,7 +151,7 @@ void Img<T>::CopyTo(Img<T>* _out) const
 	}
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			_out->in(i, j) = this->out(i, j);
+			_out->set(i, j) = this->get(i, j);
 		}
 	}
 
@@ -164,7 +167,7 @@ void Img<T>::Print()
 	std::cout << "Img Size: [ " << h << ", " << w << " ]" << std::endl;
 	for (int i = starty; i < max_print_h; i++){
 		for (int j = startx; j < max_print_w; j++){
-			std::cout << out(i, j) << " ";
+			std::cout << get(i, j) << " ";
 		}
 		std::cout << std::endl;
 	}
@@ -180,7 +183,7 @@ void Img<T>::ConvertTypeFrom(const Img<unsigned char>& _in)
 	}
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			im_[i*w + j] = static_cast<T>(_in.out(i, j));
+			im_[i*w + j] = static_cast<T>(_in.get(i, j));
 		}
 	}
 }
@@ -195,7 +198,7 @@ void Img<T>::ConvertTypeFrom(const Img<unsigned short>& _in)
 	}
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			im_[i*w + j] = static_cast<T>(_in.out(i, j));
+			im_[i*w + j] = static_cast<T>(_in.get(i, j));
 		}
 	}
 }
@@ -210,7 +213,7 @@ void Img<T>::ConvertTypeFrom(const Img<int>& _in)
 	}
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			im_[i*w + j] = static_cast<T>(_in.out(i, j));
+			im_[i*w + j] = static_cast<T>(_in.get(i, j));
 		}
 	}
 }
@@ -225,7 +228,7 @@ void Img<T>::ConvertTypeFrom(const Img<float>& _in)
 	}
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			im_[i*w + j] = static_cast<T>(_in.out(i, j));
+			im_[i*w + j] = static_cast<T>(_in.get(i, j));
 		}
 	}
 }
@@ -240,7 +243,7 @@ void Img<T>::ConvertTypeFrom(const Img<double>& _in)
 	}
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			im_[i*w + j] = static_cast<T>(_in.out(i, j));
+			im_[i*w + j] = static_cast<T>(_in.get(i, j));
 		}
 	}
 }
@@ -298,7 +301,7 @@ bool Binarize(Img<T1>& _in, Img<T2>* _bin_map, float thres)
 	int w = _in.w;
 	for (int i = 0; i < h; i++){
 		for (int j = 0; j < w; j++){
-			(*_bin_map).im(i, j) = (_in.im(i, j) > thres) ? 1 : 0;
+			(*_bin_map).set(i, j) = (_in.get(i, j) > thres) ? 1 : 0;
 		}
 	}
 	return true;

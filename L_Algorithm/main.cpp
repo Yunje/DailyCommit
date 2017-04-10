@@ -3,7 +3,7 @@
 #include <vector>
 #include "lap_define.h"
 #include "SIMD.h"
-#include <ctime>
+//#include <ctime>
 #include "Interpolation.h"
 #include "segmentation.h"
 
@@ -17,8 +17,8 @@ float pResult[ARR_SIZE];
 
 int main()
 {
-	//InterpPrac();
-	int arr2d[4*4] = {
+	InterpPrac();
+	/*int arr2d[4*4] = {
 		1,0,1,1,
 		0,1,0,1,
 		1,0,1,1,
@@ -35,7 +35,7 @@ int main()
 			std::cout << out[i * 4 + j] << " ";
 		}
 		std::cout << std::endl;
-	}
+	}*/
 
 
 	/*int nSize = (int)ARR_SIZE;

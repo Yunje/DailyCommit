@@ -14,7 +14,7 @@ void ComputeArraySSE(float* pArray1, float* pArray2, float* pResult, int nSize)
 	__m128* pDest = (__m128*) pResult;
 	__m128 m0_5 = _mm_set1_ps(0.5f);
 
-	for (int i = 0; i < nLoop; i++){
+	for (int i = 0; i < nLoop; i++){ 
 		m1 = _mm_mul_ps(*pSrc1, *pSrc1);
 		m2 = _mm_mul_ps(*pSrc2, *pSrc2);
 		m3 = _mm_add_ps(m1, m2);
