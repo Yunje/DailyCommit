@@ -16,9 +16,10 @@ void MemZero(T* ptr, int sz1)
 }
 
 template<typename T>
-void MemFree(T* ptr)
+void MemFree(T** ptr)
 {
-	delete []ptr;
+	delete [](*ptr);
+	(*ptr) = nullptr;
 }
 
 template<typename T>
@@ -41,12 +42,13 @@ void MemZero(T** ptr, int sz1, int sz2)
 }
 
 template<typename T>
-void MemFree(T** ptr, int sz1)
+void MemFree(T*** ptr, int sz1)
 {
 	for (int i = 0; i < sz1; i++){
-		delete[]ptr[i];
+		delete[](*ptr)[i];
 	}
-	delete[] ptr;
+	delete[] (*ptr);
+	(*ptr) = nullptr;
 }
 
 template<typename T>
@@ -74,15 +76,16 @@ void MemZero(T*** ptr, int sz1, int sz2, int sz3)
 }
 
 template<typename T>
-void MemFree(T*** ptr, int sz1, int sz2)
+void MemFree(T**** ptr, int sz1, int sz2)
 {
 	for (int i = 0; i < sz1; i++){
 		for (int j = 0; j < sz2; j++){
-			delete[] ptr[i][j];
+			delete[] (*ptr)[i][j];
 		}
-		delete[] ptr[i];
+		delete[] (*ptr)[i];
 	}
-	delete[] ptr;
+	delete[] (*ptr);
+	(*ptr) = nullptr;
 }
 
 #endif

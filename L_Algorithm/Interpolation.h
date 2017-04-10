@@ -125,8 +125,8 @@ void BicubicInterpolation(const Img<T>& in, Img<T>* out)
 		}
 	}
 		
-	MemFree<float>(img, in.h*in.w);
-	MemFree<float>(coefs, in.h*in.w);
+	MemFree<float>(&img, in.h*in.w);
+	MemFree<float>(&coefs, in.h*in.w);
 }
 
 template <typename T>
