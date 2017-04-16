@@ -166,8 +166,8 @@ void InterpPrac(void)
 {
 	std::clock_t start, end;
 	
-	//SetMult(MVMult1D_SSE, VVMult_SSE);
-	SetMult(MVMult1D<float>, VVMult<float>);
+	SetMult(MVMult1D_SSE, VVMult_SSE);
+	//SetMult(MVMult1D<float>, VVMult<float>);
 
 	Imguc temp("C:\\Users\\yunje\\Documents\\GitHub\\L_Algorithm\\L_Algorithm\\butterfly.gray.jpg");
 	temp.SaveImage("C:\\Users\\yunje\\Documents\\GitHub\\L_Algorithm\\L_Algorithm\\butterfly.bilinear.bmp", UNSIGNED_CHAR);
