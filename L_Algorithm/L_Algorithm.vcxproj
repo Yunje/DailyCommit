@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_types.h" />
+    <ClInclude Include="DynamicTable.h" />
     <ClInclude Include="Interpolation.h" />
     <ClInclude Include="lap_define.h" />
     <ClInclude Include="lap_m2m.h" />

@@ -38,6 +38,8 @@ int main()
 		std::cout << std::endl;
 	}
 
+	// < label , max value>
+	// Dynamic Table
 
 	/*int nSize = (int)ARR_SIZE;
 	for (int i = 0; i < ARR_SIZE; i++){
